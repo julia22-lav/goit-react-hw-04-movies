@@ -43,4 +43,4 @@ const fetchMovies = (query) => {
   
   
   
- export default {fetchMovies, fetchTrending, fetchMovieDetails, fetchMovieCredits, fetchMovieReviews}
+ export {fetchMovies, fetchTrending, fetchMovieDetails, fetchMovieCredits, fetchMovieReviews}
