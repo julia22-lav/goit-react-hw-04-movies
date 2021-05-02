@@ -4,6 +4,7 @@ import { fetchMovieDetails } from "../../services/fetch";
 import MovieCast from "../../components/MovieCast";
 import MovieReviews from "../../components/MovieReviews";
 import s from "./MovieDetailsPage.module.css";
+import defImg from "./no_movie_found.png";
 
 
 class MovieDetailsPage extends Component {
@@ -17,18 +18,24 @@ class MovieDetailsPage extends Component {
     });
   }
 
+  handleGoBack = () => {
+    const {location, history} = this.props;
+
+    location.state && location.state.from
+    ? history.push(location.state.from)
+    : history.push("/");
+  };
+  
   render() {
     return (
       <>
-        {/* <button
+        <button
           className={s.ButtonGoBack}
           type="button"
-          onClick={() => {
-            this.props.history.goBack();
-          }}
+          onClick={this.handleGoBack}
         >
           Go back
-        </button> */}
+        </button>
         {this.state.movie ? (
           <>
             <div className={s.MovieCard}>
@@ -37,7 +44,7 @@ class MovieDetailsPage extends Component {
                 src={
                   this.state.movie.backdrop_path
                     ? `https://image.tmdb.org/t/p/w500${this.state.movie.backdrop_path}`
-                    : "https://image.tmdb.org/t/p/w500/wwemzKWzjKYJFfCeiB57q3r4Bcm.png"
+                    : defImg
                 }
                 alt=""
               />
@@ -60,7 +67,8 @@ class MovieDetailsPage extends Component {
             <ul>
               <li>
                 <NavLink className={s.Link}
-                  to={`${this.props.match.url}/cast`}
+                  to={{pathname: `${this.props.match.url}/cast`,
+                state: this.props.location.state}}
                 >
                   Cast
                 </NavLink>
@@ -68,7 +76,8 @@ class MovieDetailsPage extends Component {
               <li>
                 <NavLink
                   className={s.Link}
-                  to={`${this.props.match.url}/reviews`}
+                  to={{pathname: `${this.props.match.url}/reviews`,
+                  state: this.props.location.state}}
                 >
                   Reviews
                 </NavLink>

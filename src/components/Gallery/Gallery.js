@@ -1,16 +1,16 @@
 import { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import s from './Gallery.module.css';
 
 class Gallery extends Component {
 	render() {
-		const { movies } = this.props;
+		const { movies, location } = this.props;
 		return (
 			<ul>
 				{movies.map(({ title, id }) => (
 					<li key={id} className={s.GalleryItem}>
-						<Link className={s.Link} to={`/movies/${id}`}>
+						<Link className={s.Link} to={{ pathname: `/movies/${id}`, state: { from: location } }}>
 							{title}
 						</Link>
 					</li>
@@ -24,4 +24,4 @@ Gallery.propTypes = {
 	movies: PropTypes.array
 };
 
-export default Gallery;
+export default withRouter(Gallery);

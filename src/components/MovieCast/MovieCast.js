@@ -1,5 +1,6 @@
 import {Component} from "react";
 import {fetchMovieCredits} from "../../services/fetch";
+import defImg from "../../pages/MovieDetailsPage/no_movie_found.png";
 
 class MovieCast extends Component {
     state = {movieCast: []}
@@ -24,7 +25,7 @@ class MovieCast extends Component {
                           src={
                             profile_path
                               ? `https://image.tmdb.org/t/p/w500${profile_path}`
-                              : "https://image.tmdb.org/t/p/w500/wwemzKWzjKYJFfCeiB57q3r4Bcm.png"
+                              : defImg
                           }
                           alt={name}
                           width={"200px"}
